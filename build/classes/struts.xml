@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="default" extends="struts-default">
+		
+		<!-- Short Cuts    -->
+		<action name="LoginShortCut">
+		<result>index.jsp</result>
+		</action>    
+		
+		<action name="ModifyShortCut">
+		<result>ModifyUser.jsp</result>
+		</action>
+		
+		
+		<action name="registerShortCut">
+		<result>Register.jsp</result>
+		</action>
+    	<!-- Registration Action   -->
+    	<action name="register" class="org.xphase.ActionClass.RegisterAction" method = "execute">
+    	<result name="success">Success.jsp</result>
+    	<result name="input">Register.jsp</result>
+    	<result name="error">Register.jsp</result>
+    	</action>
+    	<!-- Login and Logout Action -->
+    	<action name="logout" class="org.xphase.ActionClass.LoginAction" method = "logout">
+       	<result name="input">Profile.jsp</result>
+    	<result name="success">index.jsp</result>
+    	<result name="error">Error.jsp</result>
+   		</action>
+   		<action name="Login" class="org.xphase.ActionClass.LoginAction" method = "execute">
+    	<result name="success">Profile.jsp</result>
+    	<result name="input">index.jsp</result>
+    	<result name="error">Error.jsp</result>
+    	</action>
+   		<!-- User Image Upload Action -->
+   		<action name="userImage">
+   		<result name="success">ProfileUpdate.jsp</result>
+   		</action>
+   		<!-- Profile Update shortCut  -->
+   		<action name="ProfileUpdate">
+   		<result>ProfileUpdate.jsp</result>
+   		</action>
+   		 <!--    -->
+   		<action name="UserImageShort">
+   		<result>UserImage.jsp</result>
+   		</action>
+   		<!-- Interceptor for image process -->
+   		<action name="userImage" class="org.xphase.ActionClass.FileUploadAction" method="execute">	
+		<interceptor-ref name="fileUpload">
+		<param name="maximumSize">102097152</param>
+		<param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+		</interceptor-ref>
+		
+		<interceptor-ref name="defaultStack"/>
+		<result name="success">SuccessUserImage.jsp</result>
+		<result name="input">UserImage.jsp</result>
+		</action>
+		<!-- Show the image -->		
+		<action name="ClickHereToSeeProfilePic">
+		<result>SuccessUserImage.jsp</result>
+		</action>
+		
+		<action name="SearchForIDOrUserName" class="org.xphase.ActionClass.SearchForUser" method="execute">
+		<result name="input">ProfileUpdate.jsp</result>
+		<result name="success">ProfileUpdate.jsp</result>
+		</action>
+		
+		<action name="ShowAllData" class="org.xphase.ActionClass.Profile" method="execute">
+		<result name="input">ShowAllData.jsp</result>
+		<result name="success">ShowAllData.jsp</result>
+		</action>
+		
+		<action name="UserNameModifying" class="org.xphase.ActionClass.UserNameInRegistration" method="execute">
+		<result name="input">ModifyUser.jsp</result>
+		<result name="success">Success.jsp</result>
+		</action>
+		
+		<action name="delete" class="org.xphase.ActionClass.DeleteUser" method="execute">
+		<result name="input">Delete.jsp</result>
+		<result name="success">DeleteSuccess.jsp</result>
+		<result name="error">DeleteNotPossible.jsp</result>
+		</action>
+		
+		<action name="DeleteShortCut">
+		<result>Delete.jsp</result>
+		</action>
+    </package>
+
+</struts>
